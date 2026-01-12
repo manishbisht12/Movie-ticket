@@ -1,5 +1,5 @@
 
-
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Tagesschrift&display=swap');
 @import "tailwindcss";
 
 @layer  {
@@ -7,3 +7,10 @@
     @apply bg-black text-white;
   }
 }
+
+@theme{
+  --font-Tagesschrift:  "Tagesschrift", system-ui;
+  --font-Lilita :  "Lilita One", sans-serif;
+}
+
+
