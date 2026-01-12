@@ -1,13 +1,12 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // 1. usePathname import kiya
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [movie, setMovie] = useState("");
-  const pathname = usePathname(); // 2. Current path get kiya
+  const pathname = usePathname();
 
-  // Ek helper function taaki code saaf dikhe
   const isActive = (path) => pathname === path;
 
   return (
@@ -71,19 +70,22 @@ export default function Navbar() {
             "
           />
 
-          <button
-            className="
-              px-6 py-2 rounded-md
-              border border-red-500
-              text-red-500
-              font-semibold
-              hover:bg-red-500
-              hover:text-white
-              transition-all duration-300
-            "
-          >
-            Login
-          </button>
+          {/* LOGIN ROUTE ADDED HERE */}
+          <Link href="/login">
+            <button
+              className="
+                px-6 py-2 rounded-md
+                border border-red-500
+                text-red-500
+                font-semibold
+                hover:bg-red-500
+                hover:text-white
+                transition-all duration-300
+              "
+            >
+              Login
+            </button>
+          </Link>
         </div>
       </div>
     </nav>
