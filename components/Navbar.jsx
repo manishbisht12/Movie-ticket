@@ -1,26 +1,54 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // 1. usePathname import kiya
 
 export default function Navbar() {
   const [movie, setMovie] = useState("");
+  const pathname = usePathname(); // 2. Current path get kiya
+
+  // Ek helper function taaki code saaf dikhe
+  const isActive = (path) => pathname === path;
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md">
       <div className="px-16 py-6 flex items-center justify-between">
         
         {/* LEFT MENU */}
-        <div className="flex gap-12 text-lg font-medium text-white/90">
-          <Link href="/" className="cursor-pointer hover:text-red-500 transition">
+        <div className="flex gap-12 text-lg font-medium">
+          <Link 
+            href="/" 
+            className={`cursor-pointer transition ${
+              isActive("/") ? "text-red-500" : "text-white/90 hover:text-red-500"
+            }`}
+          >
             Home
           </Link>
-          <Link href="/movies" className="cursor-pointer hover:text-red-500 transition">
+          
+          <Link 
+            href="/movies" 
+            className={`cursor-pointer transition ${
+              isActive("/movies") ? "text-red-500" : "text-white/90 hover:text-red-500"
+            }`}
+          >
             Movies
           </Link>
-          <Link href="/shows" className="cursor-pointer hover:text-red-500 transition">
+          
+          <Link 
+            href="/shows" 
+            className={`cursor-pointer transition ${
+              isActive("/shows") ? "text-red-500" : "text-white/90 hover:text-red-500"
+            }`}
+          >
             Shows
           </Link>
-          <Link href="/seats" className="cursor-pointer hover:text-red-500 transition">
+          
+          <Link 
+            href="/seats" 
+            className={`cursor-pointer transition ${
+              isActive("/seats") ? "text-red-500" : "text-white/90 hover:text-red-500"
+            }`}
+          >
             Book
           </Link>
         </div>
