@@ -1,77 +1,62 @@
 "use client";
+import React from "react";
+import axios from "axios";
 
-const loadScript = (src) => {
-  return new Promise((resolve) => {
-    const script = document.createElement("script");
-    script.src = src;
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-    document.body.appendChild(script);
-  });
-};
-
-export default function RazorpayPayment({ amount, selectedSeats, onToggleLoading }) {
-  
+const RazorpayPayment = ({ amount, selectedSeats, movieInfo }) => {
   const handlePayment = async () => {
-    if (amount <= 0) {
-      alert("Please select seats first");
-      return;
-    }
+    try {
+      // Step 1: Backend se Order ID mangwayein
+      const { data: orderData } = await axios.post("http://localhost:5000/api/payment/checkout", {
+        amount,
+      });
 
-    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+      const options = {
+        key: "rzp_test_S2ynz8v3J36ueP", // Aapki Test Key ID
+        amount: orderData.order.amount,
+        currency: "INR",
+        name: "Movie Magic",
+        description: `Booking for ${movieInfo.movie}`,
+        order_id: orderData.order.id,
+        handler: async function (response) {
+          // Step 2: Payment success hone par Backend mein booking save karein
+          try {
+            const { data: bookingData } = await axios.post("http://localhost:5000/api/bookings/new", {
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_signature: response.razorpay_signature,
+              movie: movieInfo.movie,
+              seats: selectedSeats,
+              showTime: movieInfo.showTime,
+              totalPrice: amount
+            }, { withCredentials: true });
 
-    if (!res) {
-      alert("Razorpay SDK failed to load. Check your connection.");
-      return;
-    }
-
-   const options = {
-  key: "rzp_test_S2unR8OVHyrAkl", 
-  amount: amount * 100,
-  currency: "INR",
-  name: "MovieTicket Pro",
-  description: `Booking for ${selectedSeats.length} seats`,
-  handler: function (response) {
-    alert("Payment Successful! ID: " + response.razorpay_payment_id);
-  },
-  // --- UPI ko enable aur priority dene ke liye ye add karein ---
-  config: {
-    display: {
-      blocks: {
-        upi: {
-          name: "Pay via UPI",
-          instruments: [
-            { method: "upi" }, // Isse GPay, PhonePe, Paytm sab dikhenge
-          ],
+            if (bookingData.success) {
+              alert("Payment Successful! Your seats are booked.");
+              window.location.href = "/profile"; // Redirect to tickets page
+            }
+          } catch (err) {
+            alert("Payment success but booking failed. Please contact support.");
+          }
         },
-      },
-      sequence: ["block.upi", "block.card"],
-      preferences: {
-        show_default_blocks: true,
-      },
-    },
-  },
-  prefill: {
-    name: "Manish",
-    email: "manibisht345@gmail.com",
-    contact: "9557387436",
-    method: "upi", // Isse popup khulte hi UPI wala section focus mein rahega
-  },
-  theme: {
-    color: "#ef4444",
-  },
-};
+        theme: { color: "#dc2626" }, // Red theme to match your UI
+      };
 
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error("Payment Error:", error);
+      alert("Something went wrong with Razorpay.");
+    }
   };
 
   return (
     <button
       onClick={handlePayment}
-      className="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold transition-all active:scale-95 text-sm"
+      className="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl shadow-lg transition-all active:scale-95 uppercase tracking-widest"
     >
-      PROCEED TO PAY ₹{amount}
+      Pay ₹{amount} & Book Now
     </button>
   );
-}
+};
+
+export default RazorpayPayment;
