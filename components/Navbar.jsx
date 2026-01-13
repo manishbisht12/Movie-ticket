@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { MdLogout } from "react-icons/md"; // Added icon import
+import { MdLogout } from "react-icons/md"; 
 
 export default function Navbar() {
   const [movie, setMovie] = useState("");
@@ -23,17 +23,16 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      // 1. Call Backend Logout
+    
       await axios.get("http://localhost:5000/api/auth/logout", { withCredentials: true });
-      
-      // 2. Show notification first
+     
       toast.success("Logging out... See you soon!");
 
-      // 3. Wait 2 seconds so the user can actually see the toast
+     t
       setTimeout(() => {
         localStorage.removeItem("user");
         setUser(null);
-        router.push("/login");
+        router.push("/");
       }, 2000);
       
     } catch (error) {
@@ -46,15 +45,15 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md">
       <div className="px-16 py-6 flex items-center justify-between">
         
-        {/* LEFT MENU - Using flex and gap for spacing */}
-        <div className="flex gap-12 text-lg font-medium">
+      
+        <div className="flex gap-12 text-lg font-Tagesschrift">
           <Link href="/" className={`transition ${isActive("/") ? "text-red-500" : "text-white/90 hover:text-red-500"}`}>Home</Link>
           <Link href="/movies" className={`transition ${isActive("/movies") ? "text-red-500" : "text-white/90 hover:text-red-500"}`}>Movies</Link>
           <Link href="/shows" className={`transition ${isActive("/shows") ? "text-red-500" : "text-white/90 hover:text-red-500"}`}>Shows</Link>
           <Link href="/seats" className={`transition ${isActive("/seats") ? "text-red-500" : "text-white/90 hover:text-red-500"}`}>Book</Link>
         </div>
 
-        {/* RIGHT SIDE */}
+       
         <div className="flex items-center gap-6">
           <input
             type="search"

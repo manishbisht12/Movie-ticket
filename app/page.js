@@ -20,7 +20,7 @@ export default function HomePage() {
 
       {/* ================= HERO ================= */}
       <div className="flex-grow flex flex-col items-start justify-center px-24 mt-32 max-w-3xl">
-        <h1 className="text-5xl font-bold leading-tight">
+        <h1 className="text-5xl font-Lilita leading-tight">
           Book Movie Tickets <br />
           <span className="text-red-500">Online Easily</span>
         </h1>
@@ -31,14 +31,14 @@ export default function HomePage() {
         </p>
 
         <div className="mt-8 flex gap-6">
-          <button className="px-8 py-3 rounded-md bg-red-600 hover:bg-red-700 transition">
+          <button className="px-8 py-3 rounded-md font-Tagesschrift bg-red-600 hover:bg-red-700 transition">
             Book Now
           </button>
 
           {/* Explore Movies Button -> /movies */}
           <button 
             onClick={() => router.push("/movies")}
-            className="px-8 py-3 rounded-md border border-white/40 hover:border-red-500 hover:text-red-500 transition"
+            className="px-8 py-3 rounded-md border font-Tagesschrift border-white/40 hover:border-red-500 hover:text-red-500 transition"
           >
             Explore Movies
           </button>

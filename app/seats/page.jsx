@@ -347,8 +347,8 @@ function SeatsContent() {
         
         {/* SCREEN SECTION */}
         <div className="mb-20 flex flex-col items-center">
-          <div className="w-full max-w-2xl h-[2px] bg-gradient-to-r from-transparent via-white/50 to-transparent shadow-[0_0_25px_rgba(255,255,255,0.4)] rounded-full"></div>
-          <p className="text-[10px] text-gray-500 mt-4 tracking-[0.5em] uppercase">Screen</p>
+          <div className="w-full max-w-2xl h-[3px] bg-gradient-to-r from-transparent via-red-600 to-transparent shadow-[0_0_25px_rgba(220,38,38,0.6)] rounded-full"></div>
+          <p className="text-[10px] text-gray-500 mt-4 tracking-[0.5em] uppercase italic">Screen</p>
         </div>
 
         {/* SEAT GRID SECTIONS */}

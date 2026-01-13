@@ -29,7 +29,7 @@ export default function LoginPage() {
       );
 
       if (data.success) {
-        toast.success("Login successful! Redirecting...");
+        toast.success("Login successful!");
         
         // Optional: Save non-sensitive user data to local storage for UI use
         localStorage.setItem("user", JSON.stringify(data.user));

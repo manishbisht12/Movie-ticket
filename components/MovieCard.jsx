@@ -3,13 +3,13 @@ import Link from "next/link";
 import { useMovies } from "@/context/MovieContext";
 
 export default function MovieCard() {
-  const { movies } = useMovies(); // 👈 CONTEXT
+  const { movies } = useMovies(); 
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {movies.map((movie) => (
         <div
-          key={movie.id}
+          key={movie._id}
           className="bg-black/70 rounded-xl border border-white/10 hover:border-red-500 transition"
         >
           <img
