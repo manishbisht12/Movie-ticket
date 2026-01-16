@@ -52,7 +52,7 @@ function SeatsContent() {
 
     const fetchBooked = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/api/bookings/booked-seats`, {
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings/booked-seats`, {
           params: { movie, showTime: showTimeKey }
         });
         if (data.success) setBookedSeats(data.bookedSeats);
@@ -71,7 +71,7 @@ function SeatsContent() {
     try {
       setLoading(true);
       
-      const { data: orderData } = await axios.post("http://localhost:5000/api/payment/checkout", {
+      const { data: orderData } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/payment/checkout`, {
         amount: totalPrice
       });
 
@@ -83,7 +83,7 @@ function SeatsContent() {
         order_id: orderData.order.id,
        handler: async function (response) {
   try {
-    const res = await axios.post("http://localhost:5000/api/bookings/new", {
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings/new`, {
       movie,
       seats: selectedSeats,
       showTime: showTimeKey,

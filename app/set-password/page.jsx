@@ -28,7 +28,7 @@ export default function SetPassword() {
 
     setLoading(true);
     try {
-      const { data } = await axios.post("http://localhost:5000/api/auth/set-password", {
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/set-password`, {
         phone: formData.phone,
         password: formData.password,
       });
