@@ -29,7 +29,7 @@ export default function ShowsPage() {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <Navbar />
       <div className="flex-grow px-16 pt-32 pb-10">
-        <h1 className="text-3xl font-bold mb-8 ml-3">Select Show Time</h1>
+        <h1 className="text-3xl font-Tagesschrift mb-8 ml-3">Select Show Time</h1>
 
         <div className="flex gap-4 mb-12 ml-3 overflow-x-auto pb-4 no-scrollbar">
           {dates.map((item, index) => (

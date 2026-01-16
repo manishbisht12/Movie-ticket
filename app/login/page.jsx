@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -29,7 +30,7 @@ export default function LoginPage() {
       );
 
       if (data.success) {
-        toast.success("Login successful! Redirecting...");
+        toast.success("Login successful!");
         
         // Optional: Save non-sensitive user data to local storage for UI use
         localStorage.setItem("user", JSON.stringify(data.user));
@@ -53,7 +54,7 @@ export default function LoginPage() {
       
       <Navbar />
 
-      <div className="flex items-center justify-center pt-32 pb-20">
+      <div className="flex items-center justify-center pt-32 ">
         <form
           onSubmit={handleLogin}
           className="w-full max-w-md bg-black/70 border border-white/10 rounded-xl p-8 shadow-2xl"
@@ -67,7 +68,7 @@ export default function LoginPage() {
             <label className="text-sm text-white/70">Email</label>
             <input
               type="email"
-              placeholder="example@mail.com"
+              placeholder="Email@mail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -120,7 +121,7 @@ export default function LoginPage() {
 
           <p className="text-sm text-center mt-4 text-white/60">
             Don’t have an account?{" "}
-            <Link href="/register" className="text-red-500 hover:underline font-medium">
+            <Link href="/register" className="text-red-500 hover:underline decoration-transparent font-medium">
               Register
             </Link>
           </p>
