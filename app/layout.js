@@ -1,6 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Script from "next/script"; // 👈 Script import kiya
+import Script from "next/script"; 
+import { MovieProvider } from "@/context/MovieContext"; 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +24,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
+       <MovieProvider> 
+          {children}
+          <ToastContainer theme="dark" position="top-center" />
+        </MovieProvider>
         
         {/* Razorpay SDK Loader - Ye hona bahut zaroori hai */}
         <Script 

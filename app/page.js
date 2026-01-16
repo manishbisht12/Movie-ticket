@@ -31,7 +31,9 @@ export default function HomePage() {
         </p>
 
         <div className="mt-8 flex gap-6">
-          <button className="px-8 py-3 rounded-md font-Tagesschrift bg-red-600 hover:bg-red-700 transition">
+          <button 
+          onClick={() => router.push("/shows")}
+          className="px-8 py-3 rounded-md font-Tagesschrift bg-red-600 hover:bg-red-700 transition cursor-pointer">
             Book Now
           </button>
 
@@ -49,13 +51,15 @@ export default function HomePage() {
       <div className="mt-40 px-24 grid grid-cols-3 gap-12 pb-20">
         
         {/* Ticket - Added Hover Scale */}
-        <div className="bg-black/50 p-8 rounded-lg border border-white/10 text-center transition-transform duration-300 hover:scale-105 hover:border-white/20">
+        <div className="bg-black/50 p-8 rounded-lg border border-white/10 text-center transition-transform duration-300 hover:scale-105 hover:border-white/20 cursor-pointer"
+         onClick = {()=> router.push("/shows")}
+         >
           <img
             src="/images/ticket.png"
             alt="Ticket"
             className="w-16 mx-auto mb-4 filter invert brightness-200"
           />
-          <h3 className="text-xl font-semibold text-red-500">
+          <h3 className="text-xl font-semibold text-red-500" >
             Easy Ticket Booking
           </h3>
           <p className="mt-3 text-white/70">
@@ -82,13 +86,15 @@ export default function HomePage() {
         </div>
 
         {/* Video - Added Hover Scale */}
-        <div className="bg-black/50 p-8 rounded-lg border border-white/10 text-center transition-transform duration-300 hover:scale-105 hover:border-white/20">
+        <div 
+        onClick={() => router.push("/movies")}
+        className="bg-black/50 p-8 rounded-lg border cursor-pointer border-white/10 text-center transition-transform duration-300 hover:scale-105 hover:border-white/20">
           <img
             src="/images/video.png"
             alt="Video"
             className="w-16 mx-auto mb-4 filter invert brightness-200"
           />
-          <h3 className="text-xl font-semibold text-red-500">
+          <h3 className="text-xl font-semibold  text-red-500">
             Latest Movies
           </h3>
           <p className="mt-3 text-white/70">

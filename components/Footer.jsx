@@ -5,7 +5,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-32 py-8 text-center text-white/50 border-t border-white/10">
-      © {year} Movie Ticket Booking. All rights reserved.
+      © {year} Movie Magic. All rights reserved.
     </footer>
   );
 }

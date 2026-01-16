@@ -1,4 +1,5 @@
 "use client";
+import { useMovies } from "@/context/MovieContext";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -7,7 +8,8 @@ import axios from "axios";
 import { MdLogout } from "react-icons/md"; 
 
 export default function Navbar() {
-  const [movie, setMovie] = useState("");
+ // const [movie, setMovie] = useState("");
+ const { search, setSearch } = useMovies();
   const [user, setUser] = useState(null);
   const pathname = usePathname();
   const router = useRouter();
@@ -28,7 +30,7 @@ export default function Navbar() {
      
       toast.success("Logging out... See you soon!");
 
-     t
+     
       setTimeout(() => {
         localStorage.removeItem("user");
         setUser(null);
@@ -55,13 +57,15 @@ export default function Navbar() {
 
        
         <div className="flex items-center gap-6">
+          {pathname === "/movies" && (
           <input
             type="search"
             placeholder="Search movie..."
-            value={movie}
-            onChange={(e) => setMovie(e.target.value)}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="px-4 py-2 w-60 rounded-md bg-black/60 border border-white/30 text-white placeholder-white/60 outline-none focus:border-red-500 transition"
           />
+          )}
 
           {user ? (
             <div className="relative group">
