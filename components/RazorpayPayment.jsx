@@ -6,7 +6,7 @@ const RazorpayPayment = ({ amount, selectedSeats, movieInfo }) => {
   const handlePayment = async () => {
     try {
       // Step 1: Backend se Order ID mangwayein
-      const { data: orderData } = await axios.post("http://localhost:5000/api/payment/checkout", {
+      const { data: orderData } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/payment/checkout`, {
         amount,
       });
 

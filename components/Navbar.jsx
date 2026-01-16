@@ -26,7 +26,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
     
-      await axios.get("http://localhost:5000/api/auth/logout", { withCredentials: true });
+      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`, { withCredentials: true });
      
       toast.success("Logging out... See you soon!");
 

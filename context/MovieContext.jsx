@@ -19,7 +19,7 @@ export const MovieProvider = ({ children }) => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/movies/all");
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/movies/all`);
         if (data.success) {
           setAllMovies(data.movies);
           setMovies(data.movies);

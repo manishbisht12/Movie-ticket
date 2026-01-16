@@ -54,7 +54,7 @@ export default function VerifyOtpPage() {
 
     try {
       setLoading(true);
-      const { data } = await axios.post("http://localhost:5000/api/auth/verify-otp", {
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/verify-otp`, {
         phone, 
         otp: enteredOtp,
       });
@@ -74,7 +74,7 @@ export default function VerifyOtpPage() {
     e.preventDefault();
     try {
       setLoading(true);
-      const { data } = await axios.post("http://localhost:5000/api/auth/set-password", {
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/set-password`, {
         phone,
         password,
       });

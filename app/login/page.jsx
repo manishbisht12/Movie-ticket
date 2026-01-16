@@ -24,7 +24,7 @@ export default function LoginPage() {
     try {
       // Calling your backend login route
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
         { email, password },
         { withCredentials: true } // Important: This allows the browser to store the HttpOnly cookie
       );
