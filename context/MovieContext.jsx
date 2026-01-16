@@ -11,6 +11,7 @@ export const MovieProvider = ({ children }) => {
   const [language, setLanguage] = useState("All");
   const [genre, setGenre] = useState("All");
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   // Dynamic dropdown arrays
   const [languages, setLanguages] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -37,14 +38,28 @@ export const MovieProvider = ({ children }) => {
     fetchMovies();
   }, []);
 
+
+
+useEffect(() => {
+  console.log("Typing... Current Input:", search);
+  const handler = setTimeout(() => {
+    console.log("--- Logic Executed for:", search + " ---");
+    setDebouncedSearch(search);
+  }, 500);
+
+  return () => {
+    console.log("Timer Cleaned (User is still typing...)");
+    clearTimeout(handler);
+  };
+}, [search]);
   
   useEffect(() => {
     let filtered = allMovies;
     if (language !== "All") filtered = filtered.filter((m) => m.language === language);
     if (genre !== "All") filtered = filtered.filter((m) => m.genre === genre);
 
-   if (search.trim() !== "") {
-    const query = search.toLowerCase();
+   if (debouncedSearch.trim() !== "") {
+    const query = debouncedSearch.toLowerCase();
     
     filtered = filtered.filter((m) =>
       m.title.toLowerCase().includes(query) || 
@@ -54,7 +69,7 @@ export const MovieProvider = ({ children }) => {
   }
 
     setMovies(filtered);
-  }, [language, genre,search, allMovies]);
+  }, [language, genre,debouncedSearch, allMovies]);
 
   return (
     <MovieContext.Provider value={{ 
