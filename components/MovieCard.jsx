@@ -5,18 +5,15 @@ import { useMovies } from "@/context/MovieContext";
 export default function MovieCard() {
   const { movies } = useMovies(); 
 
-  // Helper function: Localhost URL ko Live URL se badalne ke liye
+  // Helper function: Images ko local se serve karne ke liye
   const getImageUrl = (posterPath) => {
-    if (!posterPath) return "https://via.placeholder.com/300x450?text=No+Poster";
+    if (!posterPath) return "/Images/movies/placeholder.png";
 
-    const liveBackendURL = process.env.NEXT_PUBLIC_API_URL;
+    // Agar poster path mein full URL hai, toh sirf filename extract karo
+    const filename = posterPath.split('/').pop(); // e.g., "Avatar.png"
 
-    // Agar poster path mein localhost hai, toh use live backend URL se badal do
-    if (posterPath.includes("localhost:5000")) {
-      return posterPath.replace("http://localhost:5000", liveBackendURL);
-    }
-
-    return posterPath;
+    // Local path use karo
+    return `/Images/movies/${filename}`;
   };
 
   return (
