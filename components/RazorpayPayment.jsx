@@ -20,7 +20,7 @@ const RazorpayPayment = ({ amount, selectedSeats, movieInfo }) => {
         handler: async function (response) {
           // Step 2: Payment success hone par Backend mein booking save karein
           try {
-            const { data: bookingData } = await axios.post("http://localhost:5000/api/bookings/new", {
+            const { data: bookingData } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings/new`, {
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_order_id: response.razorpay_order_id,
               razorpay_signature: response.razorpay_signature,
