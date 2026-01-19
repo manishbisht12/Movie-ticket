@@ -10,7 +10,13 @@ export default function MovieCard() {
     if (!posterPath) return "/Images/movies/placeholder.png";
 
     // Agar poster path mein full URL hai, toh sirf filename extract karo
-    const filename = posterPath.split('/').pop(); // e.g., "Avatar.png"
+    let filename = posterPath.split('/').pop(); // e.g., "1768308268403-Batman.webp"
+
+    // Timestamp prefix remove karo (assuming format: timestamp-filename)
+    const parts = filename.split('-');
+    if (parts.length > 1 && /^\d+$/.test(parts[0])) {
+      filename = parts.slice(1).join('-'); // "Batman.webp"
+    }
 
     // Local path use karo
     return `/Images/movies/${filename}`;
