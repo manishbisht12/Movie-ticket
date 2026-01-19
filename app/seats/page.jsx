@@ -230,7 +230,7 @@ function Section({ title, children }) {
 function LegendItem({ label, style }) {
   return (
     <div className="flex items-center gap-2">
-      <img src="/images/seat.png" className="w-5" style={{ filter: style }} alt={label} />
+      <img src="/Images/seat.png" className="w-5" style={{ filter: style }} alt={label} />
       <span className="text-[10px] uppercase tracking-widest text-gray-500">{label}</span>
     </div>
   );
@@ -248,7 +248,7 @@ function SeatGrid({ seats, sectionId, selected, booked, onClick }) {
         return (
           <div key={id} className="flex justify-center">
             <img
-              src="/images/seat.png"
+              src="/Images/seat.png"
               alt="seat"
               onClick={() => !isBooked && onClick(id)}
               className={`w-6 sm:w-7 transition-all duration-300 ${
