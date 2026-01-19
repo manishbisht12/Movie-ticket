@@ -13,7 +13,7 @@ export default function HomePage() {
       className="min-h-screen bg-cover bg-center text-white flex flex-col"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('/images/Home.jpg')",
+          "linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('/Images/Home.jpg')",
       }}
     >
       <Navbar />
@@ -55,7 +55,7 @@ export default function HomePage() {
          onClick = {()=> router.push("/shows")}
          >
           <img
-            src="/images/ticket.png"
+            src="/Images/ticket.png"
             alt="Ticket"
             className="w-16 mx-auto mb-4 filter invert brightness-200"
           />
@@ -73,7 +73,7 @@ export default function HomePage() {
           className="bg-black/50 p-8 rounded-lg border border-white/10 text-center cursor-pointer transition-transform duration-300 hover:scale-105 hover:border-white/20"
         >
           <img
-            src="/images/seat.png"
+            src="/Images/seat.png"
             alt="Seat"
             className="w-16 mx-auto mb-4 filter invert brightness-200"
           />
@@ -90,7 +90,7 @@ export default function HomePage() {
         onClick={() => router.push("/movies")}
         className="bg-black/50 p-8 rounded-lg border cursor-pointer border-white/10 text-center transition-transform duration-300 hover:scale-105 hover:border-white/20">
           <img
-            src="/images/video.png"
+            src="/Images/video.png"
             alt="Video"
             className="w-16 mx-auto mb-4 filter invert brightness-200"
           />
