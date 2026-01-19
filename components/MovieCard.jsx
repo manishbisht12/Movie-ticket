@@ -5,21 +5,21 @@ import { useMovies } from "@/context/MovieContext";
 export default function MovieCard() {
   const { movies } = useMovies(); 
 
-  // Helper function: Images ko local se serve karne ke liye
+  // Helper function: Images ko backend se serve karne ke liye
   const getImageUrl = (posterPath) => {
-    if (!posterPath) return "/Images/movies/placeholder.png";
+    if (!posterPath) return "https://via.placeholder.com/300x450?text=No+Poster";
 
-    // Agar poster path mein full URL hai, toh sirf filename extract karo
-    let filename = posterPath.split('/').pop(); // e.g., "1768308268403-Batman.webp"
-
-    // Timestamp prefix remove karo (assuming format: timestamp-filename)
-    const parts = filename.split('-');
-    if (parts.length > 1 && /^\d+$/.test(parts[0])) {
-      filename = parts.slice(1).join('-'); // "Batman.webp"
+    // Agar poster path mein full URL hai, toh use replace karo live backend se
+    if (posterPath.includes("localhost:5000")) {
+      return posterPath.replace("http://localhost:5000", process.env.NEXT_PUBLIC_API_URL);
     }
 
-    // Local path use karo
-    return `/Images/movies/${filename}`;
+    // Agar sirf filename hai, toh backend se load karo
+    if (!posterPath.startsWith('http')) {
+      return `${process.env.NEXT_PUBLIC_API_URL}/images/${posterPath}`;
+    }
+
+    return posterPath;
   };
 
   return (
