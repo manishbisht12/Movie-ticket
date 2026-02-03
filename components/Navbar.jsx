@@ -59,7 +59,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md">
       <div className="px-4 md:px-16 py-3 md:py-5 flex items-center justify-between gap-2">
         {/* Left Side: Menu Button & Logo */}
         <div className="flex items-center gap-3">
@@ -144,7 +144,8 @@ export default function Navbar() {
             </div>
           ) : (
             <Link href="/login">
-              <button className="px-4 py-1.5 md:px-6 md:py-2 rounded-full border border-red-500 text-red-500 font-bold hover:bg-red-500 hover:text-white transition-all text-sm">
+              <button className="px-4 py-1.5 md:px-6 md:py-2 rounded-lg border border-red-500 text-red-500 font-bold hover:bg-red-500 hover:text-white transition-all text-sm sm:text-md lg:text-lg
+">
                 Login
               </button>
             </Link>
