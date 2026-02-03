@@ -41,8 +41,8 @@ export default function MovieFilter() {
   const { language, setLanguage, genre, setGenre, languages, genres } = useMovies();
 
   return (
-    <div className="flex gap-4 mb-8">
-     
+    <div className="flex flex-wrap gap-4 mb-8">
+
       <select
         value={language}
         onChange={(e) => setLanguage(e.target.value)}
@@ -55,7 +55,7 @@ export default function MovieFilter() {
         ))}
       </select>
 
-      
+
       <select
         value={genre}
         onChange={(e) => setGenre(e.target.value)}

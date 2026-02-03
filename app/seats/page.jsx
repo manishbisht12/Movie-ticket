@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // --- GLOBAL AXIOS CONFIG ---
-axios.defaults.withCredentials = true; 
+axios.defaults.withCredentials = true;
 
 export default function SeatsPage() {
   return (
@@ -39,7 +39,7 @@ function SeatsContent() {
       toast.error("Access Denied! Please login to choose your seats.");
       setTimeout(() => {
         router.push("/login");
-      }, 2500); 
+      }, 2500);
     }
   }, [router]);
 
@@ -70,44 +70,44 @@ function SeatsContent() {
   const handlePayment = async () => {
     try {
       setLoading(true);
-      
+
       const { data: orderData } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/payment/checkout`, {
         amount: totalPrice
       });
 
       const options = {
-        key: "rzp_test_S2ynz8v3J36ueP", 
+        key: "rzp_test_S2ynz8v3J36ueP",
         amount: orderData.order.amount,
         currency: "INR",
         name: "Movie Magic",
         order_id: orderData.order.id,
-       handler: async function (response) {
-  try {
-    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings/new`, {
-      movie,
-      seats: selectedSeats,
-      showTime: showTimeKey,
-      totalPrice,
-      paymentId: response.razorpay_payment_id
-    });
+        handler: async function (response) {
+          try {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings/new`, {
+              movie,
+              seats: selectedSeats,
+              showTime: showTimeKey,
+              totalPrice,
+              paymentId: response.razorpay_payment_id
+            });
 
-    if (res.data.success) {
-      // 1. Alert user that email is sent
-      toast.success("Payment Successful! Ticket sent to your Email.");
-      
-      // 2. UI Reset
-      setBookedSeats([...bookedSeats, ...selectedSeats]);
-      setSelectedSeats([]);
+            if (res.data.success) {
+              // 1. Alert user that email is sent
+              toast.success("Payment Successful! Ticket sent to your Email.");
 
-      // 3. Redirect to home or profile after 3 seconds
-      setTimeout(() => {
-        router.push("/seats");
-      }, 3000);
-    }
-  } catch (err) {
-    toast.error(err.response?.data?.message || "Booking Failed");
-  }
-},
+              // 2. UI Reset
+              setBookedSeats([...bookedSeats, ...selectedSeats]);
+              setSelectedSeats([]);
+
+              // 3. Redirect to home or profile after 3 seconds
+              setTimeout(() => {
+                router.push("/seats");
+              }, 3000);
+            }
+          } catch (err) {
+            toast.error(err.response?.data?.message || "Booking Failed");
+          }
+        },
         theme: { color: "#dc2626" },
       };
 
@@ -132,7 +132,7 @@ function SeatsContent() {
   //     prev.includes(seatId) ? prev.filter((id) => id !== seatId) : [...prev, seatId]
   //   );
   // };
-   
+
   const handleSeatClick = (seatId) => {
     const user = localStorage.getItem("user");
     if (!user) {
@@ -151,11 +151,11 @@ function SeatsContent() {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <ToastContainer theme="dark" position="top-center" />
       <Navbar />
-      
+
       <div className="flex-grow px-5 md:px-10 pt-32 pb-10">
         <h1 className="text-3xl font-bold text-center uppercase mb-2 tracking-[0.3em]">{movie}</h1>
         <p className="text-center text-gray-500 mb-10 text-xs tracking-widest">{showTimeKey}</p>
-        
+
         {/* SCREEN SECTION */}
         <div className="mb-20 flex flex-col items-center">
           <div className="w-full max-w-2xl h-[3px] bg-gradient-to-r from-transparent via-red-600 to-transparent shadow-[0_0_25px_rgba(220,38,38,0.6)] rounded-full"></div>
@@ -163,23 +163,24 @@ function SeatsContent() {
         </div>
 
         {/* SEAT GRID SECTIONS */}
-        <div className="flex flex-col gap-14">
-           <Section title={"Silver"}>
-            <SeatGrid seats={60} sectionId="silver" selected={selectedSeats} booked={bookedSeats} onClick={handleSeatClick} />
-          </Section>
-         
+        <div className="flex flex-col gap-10 md:gap-14 overflow-x-auto pb-10 no-scrollbar">
+          <div className="min-w-[600px] md:min-w-0">
+            <Section title={"Silver"}>
+              <SeatGrid seats={60} sectionId="silver" selected={selectedSeats} booked={bookedSeats} onClick={handleSeatClick} />
+            </Section>
 
-          <Section title={"Gold"}>
-            <SeatGrid seats={80} sectionId="gold" selected={selectedSeats} booked={bookedSeats} onClick={handleSeatClick} />
-          </Section>
+            <Section title={"Gold"}>
+              <SeatGrid seats={80} sectionId="gold" selected={selectedSeats} booked={bookedSeats} onClick={handleSeatClick} />
+            </Section>
 
-          <Section title={"Platinum"}>
-            <SeatGrid seats={20} sectionId="platinum" selected={selectedSeats} booked={bookedSeats} onClick={handleSeatClick} />
-          </Section>
+            <Section title={"Platinum"}>
+              <SeatGrid seats={20} sectionId="platinum" selected={selectedSeats} booked={bookedSeats} onClick={handleSeatClick} />
+            </Section>
+          </div>
         </div>
 
         {/* LEGEND INDICATORS */}
-        <div className="flex justify-center gap-8 mt-16 border-t border-white/5 pt-8">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-6 md:mt-16 border-t border-white/5 pt-8">
           <LegendItem label="Available" style="brightness(0) invert(1) opacity(0.3)" />
           <LegendItem label="Selected" style="invert(55%) sepia(93%) saturate(415%) hue-rotate(78deg) brightness(98%) contrast(91%)" />
           <LegendItem label="Booked" style="brightness(0) saturate(100%) invert(20%) sepia(90%) saturate(5000%) hue-rotate(0deg)" />
@@ -187,22 +188,22 @@ function SeatsContent() {
 
         {/* PROCEED PANEL */}
         {selectedSeats.length > 0 && (
-          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-md px-4 z-50">
-            <div className="bg-neutral-900/95 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-              <div className="flex justify-between items-center mb-6">
+          <div className="fixed bottom-0 md:bottom-8 left-0 md:left-1/2 md:-translate-x-1/2 w-full md:max-w-md px-0 md:px-4 z-50">
+            <div className="bg-neutral-900/95 backdrop-blur-md p-5 md:p-6 rounded-t-2xl md:rounded-2xl border-t md:border border-white/10 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] md:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+              <div className="flex justify-between items-center mb-4 md:mb-6">
                 <div>
                   <p className="text-gray-400 text-[10px] uppercase tracking-widest">Selected Seats</p>
-                  <p className="text-xl font-bold">{selectedSeats.length} Tickets</p>
+                  <p className="text-lg md:text-xl font-bold">{selectedSeats.length} Tickets</p>
                 </div>
                 <div className="text-right">
                   <p className="text-gray-400 text-[10px] uppercase tracking-widest">Payable Amount</p>
-                  <p className="text-3xl font-black text-green-500">₹{totalPrice}</p>
+                  <p className="text-2xl md:text-3xl font-black text-green-500">₹{totalPrice}</p>
                 </div>
               </div>
-              <button 
-                onClick={handlePayment} 
+              <button
+                onClick={handlePayment}
                 disabled={loading}
-                className="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50"
+                className="w-full py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 text-sm md:text-base"
               >
                 {loading ? "Processing..." : `Checkout & Pay`}
               </button>
@@ -220,8 +221,8 @@ function SeatsContent() {
 
 function Section({ title, children }) {
   return (
-    <div className="text-center">
-      <h2 className="text-gray-600 text-[10px] uppercase tracking-[0.5em] mb-8 font-bold">{title}</h2>
+    <div className="text-center mb-10 md:mb-14">
+      <h2 className="text-gray-600 text-[10px] uppercase tracking-[0.5em] mb-4 md:mb-8 font-bold">{title}</h2>
       {children}
     </div>
   );
@@ -230,7 +231,7 @@ function Section({ title, children }) {
 function LegendItem({ label, style }) {
   return (
     <div className="flex items-center gap-2">
-      <img src="/Images/seat.png" className="w-5" style={{ filter: style }} alt={label} />
+      <img src="/Images/seat.png" className="w-4 md:w-5" style={{ filter: style }} alt={label} />
       <span className="text-[10px] uppercase tracking-widest text-gray-500">{label}</span>
     </div>
   );
@@ -238,8 +239,8 @@ function LegendItem({ label, style }) {
 
 function SeatGrid({ seats, sectionId, selected, booked, onClick }) {
   return (
-    <div className="grid justify-center gap-x-4 gap-y-3 mx-auto" 
-         style={{ gridTemplateColumns: "repeat(20, minmax(0, 30px))", maxWidth: "fit-content" }}>
+    <div className="grid justify-center gap-x-2 md:gap-x-4 gap-y-3 mx-auto"
+      style={{ gridTemplateColumns: "repeat(20, minmax(0, 30px))", maxWidth: "fit-content" }}>
       {Array.from({ length: seats }).map((_, index) => {
         const id = `${sectionId}-${index}`;
         const isSelected = selected.includes(id);
@@ -251,15 +252,14 @@ function SeatGrid({ seats, sectionId, selected, booked, onClick }) {
               src="/Images/seat.png"
               alt="seat"
               onClick={() => !isBooked && onClick(id)}
-              className={`w-6 sm:w-7 transition-all duration-300 ${
-                isBooked ? "cursor-not-allowed" : "cursor-pointer hover:scale-125"
-              }`}
+              className={`w-5 md:w-7 transition-all duration-300 ${isBooked ? "cursor-not-allowed" : "cursor-pointer hover:scale-125"
+                }`}
               style={{
-                filter: isBooked 
-                  ? "brightness(0) saturate(100%) invert(20%) sepia(90%) saturate(5000%) hue-rotate(0deg)" 
+                filter: isBooked
+                  ? "brightness(0) saturate(100%) invert(20%) sepia(90%) saturate(5000%) hue-rotate(0deg)"
                   : isSelected
-                  ? "invert(55%) sepia(93%) saturate(415%) hue-rotate(78deg) brightness(98%) contrast(91%)"
-                  : "brightness(0) invert(1) opacity(0.2)",
+                    ? "invert(55%) sepia(93%) saturate(415%) hue-rotate(78deg) brightness(98%) contrast(91%)"
+                    : "brightness(0) invert(1) opacity(0.2)",
               }}
             />
           </div>
