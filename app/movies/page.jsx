@@ -10,13 +10,13 @@ export default function MoviesPage() {
     <MovieProvider>
       <div className="min-h-screen bg-black text-white">
         <Navbar />
-        <div className="px-16 pt-32">
+        <div className="px-6 md:px-16 pt-32 lowercase">
           {/* <h1 className="text-3xl font-bold mb-8">Now Showing</h1> */}
           <MovieFilter />
           <MovieCard />
-         
+
         </div>
-         <Footer/>
+        <Footer />
       </div>
     </MovieProvider>
   );

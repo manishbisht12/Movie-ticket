@@ -31,10 +31,10 @@ export default function LoginPage() {
 
       if (data.success) {
         toast.success("Login successful!");
-        
+
         // Optional: Save non-sensitive user data to local storage for UI use
         localStorage.setItem("user", JSON.stringify(data.user));
-             
+
         setTimeout(() => {
           router.push("/"); // Redirect to your home/dashboard page
         }, 1500);
@@ -51,10 +51,10 @@ export default function LoginPage() {
     <div className="min-h-screen bg-black text-white">
       {/* Toast notifications container */}
       <ToastContainer theme="dark" position="top-right" autoClose={3000} />
-      
+
       <Navbar />
 
-      <div className="flex items-center justify-center pt-32 ">
+      <div className="flex items-center justify-center pt-32 px-6">
         <form
           onSubmit={handleLogin}
           className="w-full max-w-md bg-black/70 border border-white/10 rounded-xl p-8 shadow-2xl"
@@ -102,15 +102,14 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-3 bg-red-600 hover:bg-red-700 rounded font-semibold transition flex items-center justify-center ${
-              loading ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={`w-full py-3 bg-red-600 hover:bg-red-700 rounded font-semibold transition flex items-center justify-center ${loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
           >
             {loading ? (
               <span className="flex items-center gap-2">
                 <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
                 Logging in...
               </span>

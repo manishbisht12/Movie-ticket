@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function HomePage() {
   const [movie, setMovie] = useState("");
-  const router = useRouter(); 
+  const router = useRouter();
 
   return (
     <div
@@ -19,28 +19,28 @@ export default function HomePage() {
       <Navbar />
 
       {/* ================= HERO ================= */}
-      <div className="flex-grow flex flex-col items-start justify-center px-24 mt-32 max-w-3xl">
-        <h1 className="text-5xl font-Lilita leading-tight">
+      <div className="flex-grow flex flex-col items-start justify-center px-6 md:px-24 mt-32 max-w-4xl">
+        <h1 className="text-4xl md:text-6xl font-Lilita leading-tight">
           Book Movie Tickets <br />
           <span className="text-red-500">Online Easily</span>
         </h1>
 
-        <p className="mt-6 text-lg text-white/70">
+        <p className="mt-6 text-base md:text-lg text-white/70">
           Watch the latest movies in your favourite theatres.
           Choose seats, shows and enjoy the experience.
         </p>
 
-        <div className="mt-8 flex gap-6">
-          <button 
-          onClick={() => router.push("/shows")}
-          className="px-8 py-3 rounded-md font-Tagesschrift bg-red-600 hover:bg-red-700 transition cursor-pointer">
+        <div className="mt-8 flex flex-wrap gap-4 md:gap-6">
+          <button
+            onClick={() => router.push("/shows")}
+            className="px-6 md:px-8 py-3 rounded-md font-Tagesschrift bg-red-600 hover:bg-red-700 transition cursor-pointer text-sm md:text-base">
             Book Now
           </button>
 
           {/* Explore Movies Button -> /movies */}
-          <button 
+          <button
             onClick={() => router.push("/movies")}
-            className="px-8 py-3 rounded-md border font-Tagesschrift border-white/40 hover:border-red-500 hover:text-red-500 transition"
+            className="px-6 md:px-8 py-3 rounded-md border font-Tagesschrift border-white/40 hover:border-red-500 hover:text-red-500 transition text-sm md:text-base"
           >
             Explore Movies
           </button>
@@ -48,60 +48,61 @@ export default function HomePage() {
       </div>
 
       {/* ================= FEATURES ================= */}
-      <div className="mt-40 px-24 grid grid-cols-3 gap-12 pb-20">
-        
+      <div className="mt-24 md:mt-40 px-6 md:px-24 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 pb-20">
+
         {/* Ticket - Added Hover Scale */}
-        <div className="bg-black/50 p-8 rounded-lg border border-white/10 text-center transition-transform duration-300 hover:scale-105 hover:border-white/20 cursor-pointer"
-         onClick = {()=> router.push("/shows")}
-         >
+        <div className="bg-black/50 p-6 md:p-8 rounded-lg border border-white/10 text-center transition-transform duration-300 hover:scale-105 hover:border-white/20 cursor-pointer"
+          onClick={() => router.push("/shows")}
+        >
           <img
             src="/Images/ticket.png"
             alt="Ticket"
-            className="w-16 mx-auto mb-4 filter invert brightness-200"
+            className="w-12 md:w-16 mx-auto mb-4 filter invert brightness-200"
           />
-          <h3 className="text-xl font-semibold text-red-500" >
+          <h3 className="text-lg md:text-xl font-semibold text-red-500" >
             Easy Ticket Booking
           </h3>
-          <p className="mt-3 text-white/70">
+          <p className="mt-3 text-sm md:text-base text-white/70">
             Book movie tickets quickly with a smooth and simple flow.
           </p>
         </div>
 
         {/* Seat Selection Card - Added Hover Scale & Clickable */}
-        <div 
-          onClick={() => router.push("/shows")} 
-          className="bg-black/50 p-8 rounded-lg border border-white/10 text-center cursor-pointer transition-transform duration-300 hover:scale-105 hover:border-white/20"
+        <div
+          onClick={() => router.push("/shows")}
+          className="bg-black/50 p-6 md:p-8 rounded-lg border border-white/10 text-center cursor-pointer transition-transform duration-300 hover:scale-105 hover:border-white/20"
         >
           <img
             src="/Images/seat.png"
             alt="Seat"
-            className="w-16 mx-auto mb-4 filter invert brightness-200"
+            className="w-12 md:w-16 mx-auto mb-4 filter invert brightness-200"
           />
-          <h3 className="text-xl font-semibold text-red-500 no-underline">
+          <h3 className="text-lg md:text-xl font-semibold text-red-500 no-underline">
             Seat Selection
           </h3>
-          <p className="mt-3 text-white/70">
+          <p className="mt-3 text-sm md:text-base text-white/70">
             Choose your favourite seats with real-time availability.
           </p>
         </div>
 
         {/* Video - Added Hover Scale */}
-        <div 
-        onClick={() => router.push("/movies")}
-        className="bg-black/50 p-8 rounded-lg border cursor-pointer border-white/10 text-center transition-transform duration-300 hover:scale-105 hover:border-white/20">
+        <div
+          onClick={() => router.push("/movies")}
+          className="bg-black/50 p-6 md:p-8 rounded-lg border cursor-pointer border-white/10 text-center transition-transform duration-300 hover:scale-105 hover:border-white/20">
           <img
             src="/Images/video.png"
             alt="Video"
-            className="w-16 mx-auto mb-4 filter invert brightness-200"
+            className="w-12 md:w-16 mx-auto mb-4 filter invert brightness-200"
           />
-          <h3 className="text-xl font-semibold  text-red-500">
+          <h3 className="text-lg md:text-xl font-semibold  text-red-500">
             Latest Movies
           </h3>
-          <p className="mt-3 text-white/70">
+          <p className="mt-3 text-sm md:text-base text-white/70">
             Explore trending and upcoming movies instantly.
           </p>
         </div>
       </div>
+
 
       <Footer />
     </div>

@@ -38,23 +38,23 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-     
+    <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
+
       <ToastContainer theme="dark" />
-       <Navbar/>
+      <Navbar />
       <form onSubmit={handleRegister} className="w-full max-w-md p-8 border border-white/10 rounded-xl bg-black">
         <h1 className="text-2xl font-bold text-red-500 mb-6 flex justify-center">Register</h1>
-        <input placeholder="Name" className="w-full p-2 mb-4 bg-black border border-white/20 rounded-md" onChange={(e)=>setForm({...form, name: e.target.value})} required />
-        <input placeholder="Email" type="email" className="w-full p-2 mb-4 bg-black border border-white/20 rounded-md" onChange={(e)=>setForm({...form, email: e.target.value})} required />
-        <input placeholder="Phone" className="w-full p-2 mb-6 bg-black border border-white/20 rounded-md" onChange={(e)=>setForm({...form, phone: e.target.value})} required />
+        <input placeholder="Name" className="w-full p-2 mb-4 bg-black border border-white/20 rounded-md" onChange={(e) => setForm({ ...form, name: e.target.value })} required />
+        <input placeholder="Email" type="email" className="w-full p-2 mb-4 bg-black border border-white/20 rounded-md" onChange={(e) => setForm({ ...form, email: e.target.value })} required />
+        <input placeholder="Phone" className="w-full p-2 mb-6 bg-black border border-white/20 rounded-md" onChange={(e) => setForm({ ...form, phone: e.target.value })} required />
         <button disabled={loading} className="w-full py-3 bg-red-600 font-bold rounded-md">{loading ? "Sending..." : "Register"}</button>
 
-         <p className="text-sm text-center mt-4 text-white/60">
-            Already have an account?{" "}
-            <Link href="/login" className="text-red-500 hover:underline decoration-transparent font-medium">
-              Login
-            </Link>
-          </p>
+        <p className="text-sm text-center mt-4 text-white/60">
+          Already have an account?{" "}
+          <Link href="/login" className="text-red-500 hover:underline decoration-transparent font-medium">
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   );
