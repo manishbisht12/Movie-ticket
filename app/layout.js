@@ -2,8 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script"; 
 import { MovieProvider } from "@/context/MovieContext"; 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +25,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
        <MovieProvider> 
           {children}
-          <ToastContainer theme="dark" position="top-center" />
+          <Toaster position="top-center" containerStyle={{ top: '5rem' }} toastOptions={{ style: { background: '#0f172a', color: '#ffffff' } }} />
         </MovieProvider>
         
         {/* Razorpay SDK Loader - Ye hona bahut zaroori hai */}

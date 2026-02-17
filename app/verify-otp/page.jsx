@@ -5,8 +5,7 @@ import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-hot-toast";
 
 export default function VerifyOtpPage() {
   const router = useRouter();
@@ -94,7 +93,6 @@ export default function VerifyOtpPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <ToastContainer theme="dark" />
       <Navbar />
       <div className="flex justify-center items-center pt-32 pb-20">
         <form onSubmit={handleVerify} className="w-full max-w-md bg-black/70 border border-white/10 rounded-xl p-8">
