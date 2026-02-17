@@ -2,8 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 
 export default function RegisterPage() {
@@ -40,7 +39,6 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
 
-      <ToastContainer theme="dark" />
       <Navbar />
       <form onSubmit={handleRegister} className="w-full max-w-md p-8 border border-white/10 rounded-xl bg-black">
         <h1 className="text-2xl font-bold text-red-500 mb-6 flex justify-center">Register</h1>

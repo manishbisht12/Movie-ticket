@@ -4,8 +4,7 @@ import Footer from "@/components/Footer";
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-hot-toast";
 
 // --- GLOBAL AXIOS CONFIG ---
 axios.defaults.withCredentials = true;
@@ -149,7 +148,6 @@ function SeatsContent() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      <ToastContainer theme="dark" position="top-center" />
       <Navbar />
 
       <div className="flex-grow px-5 md:px-10 pt-32 pb-10">

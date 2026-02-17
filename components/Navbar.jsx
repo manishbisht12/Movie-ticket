@@ -3,7 +3,7 @@ import { useMovies } from "@/context/MovieContext";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import { MdLogout, MdKeyboardArrowDown } from "react-icons/md";
 import { FiMenu, FiX } from "react-icons/fi";

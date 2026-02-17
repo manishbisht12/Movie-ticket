@@ -6,8 +6,7 @@ import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-hot-toast";
 
 
 export default function LoginPage() {
@@ -49,8 +48,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Toast notifications container */}
-      <ToastContainer theme="dark" position="top-right" autoClose={3000} />
 
       <Navbar />
 
