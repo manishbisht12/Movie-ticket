@@ -30,8 +30,17 @@ export default function MovieDetails() {
 
   const getImageUrl = (path) => {
     if (!path) return "https://via.placeholder.com/500x750?text=No+Poster";
+    
+    // Replace localhost URLs with production URL
+    if (path.includes("localhost:5000")) {
+      const prodUrl = process.env.NEXT_PUBLIC_API_URL || "https://movie-ticket-backend-f0ss.onrender.com";
+      return path.replace("http://localhost:5000", prodUrl);
+    }
+    
     if (path.startsWith("http")) return path;
-    return `${process.env.NEXT_PUBLIC_API_URL}/images/${path}`;
+    
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://movie-ticket-backend-f0ss.onrender.com";
+    return `${apiUrl}/uploads/${path}`;
   };
 
   if (loading) return (
