@@ -9,17 +9,20 @@ export default function MovieCard() {
   const getImageUrl = (posterPath) => {
     if (!posterPath) return "https://via.placeholder.com/300x450?text=No+Poster";
 
-   
+    // Replace localhost URLs with production URL
     if (posterPath.includes("localhost:5000")) {
-      return posterPath.replace("http://localhost:5000", process.env.NEXT_PUBLIC_API_URL);
+      const prodUrl = process.env.NEXT_PUBLIC_API_URL || "https://movie-ticket-backend-f0ss.onrender.com";
+      return posterPath.replace("http://localhost:5000", prodUrl);
     }
 
-   
-    if (!posterPath.startsWith('http')) {
-      return `${process.env.NEXT_PUBLIC_API_URL}/images/${posterPath}`;
+    // If already a full URL, return as is
+    if (posterPath.startsWith('http')) {
+      return posterPath;
     }
 
-    return posterPath;
+    // For relative paths, append to API URL
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://movie-ticket-backend-f0ss.onrender.com";
+    return `${apiUrl}/uploads/${posterPath}`;
   };
 
   return (
