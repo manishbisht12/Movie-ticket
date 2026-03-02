@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useMovies } from "@/context/MovieContext";
+import MovieCardSkeleton from "./MovieCardSkeleton";
 
 export default function MovieCard() {
-  const { movies } = useMovies(); 
+  const { movies, loading } = useMovies(); 
 
   
   const getImageUrl = (posterPath) => {
@@ -27,16 +28,19 @@ export default function MovieCard() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      {movies.map((movie) => (
+
+  {loading
+    ? Array.from({ length: 8 }).map((_, index) => (
+        <MovieCardSkeleton key={index} />
+      ))
+    : movies.map((movie) => (
         <div
           key={movie._id}
           className="bg-black/70 rounded-xl border border-white/10 hover:border-red-500 transition"
         >
-         
           <img
             src={getImageUrl(movie.poster)}
             alt={movie.title}
-            
             className="w-full h-64 object-cover rounded-t-xl"
           />
 
@@ -47,9 +51,10 @@ export default function MovieCard() {
             </p>
 
             <div className="flex justify-between items-center mt-4">
-              <span className="text-yellow-400">⭐ {movie.rating}</span>
+              <span className="text-yellow-400">
+                ⭐ {movie.rating}
+              </span>
 
-              
               <Link
                 href={`/movie/${movie._id}`}
                 className="px-4 py-2 bg-red-600 rounded hover:bg-red-700 text-sm"
@@ -60,6 +65,6 @@ export default function MovieCard() {
           </div>
         </div>
       ))}
-    </div>
+</div>
   );
 }

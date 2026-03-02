@@ -12,6 +12,7 @@ export const MovieProvider = ({ children }) => {
   const [genre, setGenre] = useState("All");
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [loading, setLoading] = useState(true);
   // Dynamic dropdown arrays
   const [languages, setLanguages] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -19,6 +20,7 @@ export const MovieProvider = ({ children }) => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
+        setLoading(true);
         const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/movies/all`);
         if (data.success) {
           setAllMovies(data.movies);
@@ -33,6 +35,8 @@ export const MovieProvider = ({ children }) => {
         }
       } catch (err) {
         console.error("Movie Fetch Error:", err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchMovies();
@@ -73,7 +77,7 @@ useEffect(() => {
 
   return (
     <MovieContext.Provider value={{ 
-      movies, language, setLanguage, genre, setGenre, 
+      movies,loading, language, setLanguage, genre, setGenre, 
       languages, genres ,search,setSearch
     }}>
       {children}
